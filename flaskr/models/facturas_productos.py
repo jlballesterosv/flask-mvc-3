@@ -1,4 +1,4 @@
-from flaskr.models import db, facturas, productos
+from flaskr.models import db#, facturas, productos
 
 facturas_productos = db.Table('facturas_productos', \
     db.Column('id_factura', db.Integer, db.ForeignKey('facturas.id'), primary_key=True),\
