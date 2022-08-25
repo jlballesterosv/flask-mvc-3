@@ -1,5 +1,6 @@
 from enum import unique
 from flaskr.models import db, categorias
+from flaskr.models import *
 
 class Productos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -10,18 +11,23 @@ class Productos(db.Model):
     categoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
     facturas = db.relationship('facturas', secondary='facturas_productos', back_populates='productos')
     
-    def __init__(self, id, descripcion, valor_unitario, unidad_medida, cantidad_stock, categoria):
-        self.id = id
-        self.descripcion = descripcion
-        self.valor_unitario = valor_unitario
-        self.unidad_medida = unidad_medida
-        self.cantidad_stock = cantidad_stock
-        self.categoria = categoria
-        
-    def __repr__(self):
-        return f'Productos({self.id}, {self.descripcion}, {self.valor_unitario}, {self.unidad_medida}, {self.cantidad_stock}, {self.categoria})'
-    
-    def __str__(self):
-        return self.descripcion
+def obtener_productos():
+    conexion = obtener_conexion()
+    productos = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id, descripcion, valor_unitario, unidad_medida, cantidad_stock, categoria FROM productos")
+        productos = cursor.fetchall()
+    conexion.close()
+    return productos
+
+def obtener_productos_por_id(id):
+    conexion = obtener_conexion()
+    productos = []
+    with conexion.cursor() as cursor:
+        cursor.execute("SELECT id, descripcion, valor_unitario, unidad_medida, cantidad_stock, categoria FROM productos WHERE id = {}".format(id))
+        productos = cursor.fetchall()
+    conexion.close()
+    return productos
+
     
     
