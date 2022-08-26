@@ -11,6 +11,8 @@ class Productos(db.Model):
     categoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
     facturas = db.relationship('facturas', secondary='facturas_productos', back_populates='productos')
     
+    
+    
 def obtener_productos():
     conexion = obtener_conexion()
     productos = []
@@ -28,6 +30,9 @@ def obtener_productos_por_id(id):
         productos = cursor.fetchall()
     conexion.close()
     return productos
+
+#def crear_producto(producto):
+    
 
     
     
