@@ -4,6 +4,7 @@ from flaskr import create_app
 from flask_controller import FlaskControllerRegister
 
 app = create_app('default')
+app.secret_key = 'super secret key'
 app_context = app.app_context()
 app_context.push()
 register = FlaskControllerRegister(app)

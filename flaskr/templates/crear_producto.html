@@ -2,20 +2,29 @@
 {% block title %}{{titulo}}{% endblock %}
 
 {% block content %}
-  <form>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+  <form action="crear_producto" method="post">
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="nombre_producto">Nombre</label>
-        <input type="text" class="form-control" id="nombre_producto" placeholder="Nombre del producto">
+        <label for="descripcion">Descripción</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción del producto">
       </div>
       <div class="form-group col-md-4">
         <label for="valor_unitario">Valor Unitario</label>
-        <input type="number" class="form-control" id="valor_unitario" placeholder="Valor unitario del producto">
+        <input type="text" class="form-control" id="valor_unitario" name="valor_unitario" placeholder="Valor unitario del producto">
       </div>
       <div class="form-group col-md-4">
         <label for="unidad_medida">Unidad de Medida</label>
-        <select id="unidad_medida" class="form-control">
-          <option selected>Seleccione...</option>
+        <select id="unidad_medida" name="unidad_medida" class="form-control">
+          <option selected value="">Seleccione...</option>
           <option>GRS</option>
           <option>LTS</option>
           <option>MLS</option>
@@ -28,12 +37,12 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="cantidad_stock">Cantidad Stock</label>
-        <input type="number" class="form-control" id="cantidad_stock" placeholder="Cantidad stock">
+        <input type="number" class="form-control" id="cantidad_stock" name="cantidad_stock" placeholder="Cantidad stock">
       </div>
       <div class="form-group col-md-4">
-        <label for="id_categoria">Categoria</label>
-        <select id="id_categoria" class="form-control">
-          <option selected>Seleccione...</option>
+        <label for="categoria">Categoria</label>
+        <select id="categoria" name="categoria" class="form-control">
+          <option selected value="">Seleccione...</option>
           <option value="1">Alimentos</option>
           <option value="2">Ropa y Calzado</option>
         </select>

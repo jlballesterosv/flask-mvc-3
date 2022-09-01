@@ -27,6 +27,10 @@
                 <td>{{producto[5]}}</td>
                 <td>
                   <button type="button" class="btn btn-info">Editar</button>
+                  <a href="{{ url_for('eliminar_producto/'+producto[0]') }}" 
+                    onclick="return confirm('Seguro de borrar el producto: {{ producto[1] }}?');" title="Delete Merchant">
+                    <button type="button" class="btn btn-danger">Borrar</button>
+                  </a>
                   <button type="button" class="btn btn-danger">Borrar</button>
                 </td>
             </tr>

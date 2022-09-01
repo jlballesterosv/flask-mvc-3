@@ -1,4 +1,5 @@
 from enum import unique
+import flaskr
 from flaskr.models import db, categorias
 from flaskr.models import *
 
@@ -9,7 +10,14 @@ class Productos(db.Model):
     unidad_medida = db.Column(db.String(3), nullable=False)
     cantidad_stock = db.Column(db.Float(10,8))
     categoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
-    facturas = db.relationship('facturas', secondary='facturas_productos', back_populates='productos')
+    
+    def __init__(self,descripcion, valor_unitario,unidad_medida,cantidad_stock,categoria):
+        self.descripcion=descripcion
+        self.valor_unitario=valor_unitario
+        self.unidad_medida=unidad_medida
+        self.cantidad_stock=cantidad_stock
+        self.categoria=categoria
+    #facturas = db.relationship('facturas', secondary='facturas_productos', back_populates='productos')
     
     
     
@@ -22,7 +30,7 @@ def obtener_productos():
     conexion.close()
     return productos
 
-def obtener_productos_por_id(id):
+def obtener_producto(id):
     conexion = obtener_conexion()
     productos = []
     with conexion.cursor() as cursor:
@@ -31,8 +39,21 @@ def obtener_productos_por_id(id):
     conexion.close()
     return productos
 
-#def crear_producto(producto):
-    
+def crear_producto(producto):
+    conexion = obtener_conexion()
+    with conexion.cursor() as cursor:
+        consulta = "INSERT INTO productos (descripcion, valor_unitario, unidad_medida, cantidad_stock, categoria) VALUES('{}',{},'{}',{},{})"\
+            .format(producto.descripcion, producto.valor_unitario, producto.unidad_medida, producto.cantidad_stock, producto.categoria)
+        cursor.execute(consulta)
+        conexion.commit()
+    conexion.close()
 
+def eliminar_producto(id):
+    conexion = obtener_conexion()
+    with conexion.cursor() as cursor:
+        consulta = "DELETE FROM productos WHERE id = {}".format(id)
+        cursor.execute(consulta)
+        conexion.commit()
+    conexion.close()
     
     

@@ -1,5 +1,6 @@
 from email.mime import image
 from flask_sqlalchemy import SQLAlchemy
+import flaskr
 from flaskr.models import *
 import pymysql
 
