@@ -10,6 +10,7 @@ class ProductosController(FlaskController):
     @app.route("/productos")
     def productos():
         resultProductos = productos.obtener_productos()
+        resultProductos = productos.obtener_productos()
         return render_template('productos.html', titulo='Gestión de Productos', lista_productos=resultProductos)
     
     @app.route("/crear_producto", methods=['GET','POST'])
