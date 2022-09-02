@@ -36,8 +36,8 @@ class ProductosController(FlaskController):
                 return redirect(url_for('productos'))
         return render_template('crear_producto.html', titulo='Nuevo Producto')
     
-    @app.route("/eliminar_producto/<id>")
-    def eliminar_producto():
+    @app.route("/eliminar_producto/<id>/")
+    def eliminar_producto(id):
         print('entra eliminar')
         productos.crear_producto(id=id)
         return redirect(url_for('productos'))
