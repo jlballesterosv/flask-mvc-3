@@ -8,7 +8,7 @@ db = SQLAlchemy()
 
 def obtener_conexion():
         return pymysql.connect(host='localhost',
-                                    user='root',
+                                    user='root', 
                                     password='',
                                     db='facturacion')
 
