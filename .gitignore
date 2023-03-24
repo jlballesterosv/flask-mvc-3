@@ -1,2 +1,10 @@
 .venv
 *.pyc
+flaskr/__pycache__/__init__.cpython-310.pyc
+flaskr/__pycache__/__init__.cpython-310.pyc
+flaskr/__pycache__/app.cpython-310.pyc
+flaskr/controllers/__pycache__/productos_controller.cpython-310.pyc
+flaskr/models/__pycache__/__init__.cpython-310.pyc
+*.pyc
+*.pyc
+flaskr/models/__pycache__/productos.cpython-310.pyc
